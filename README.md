@@ -25,7 +25,8 @@ var config = {
   maxLen: 80,
   pathParams: {
     "id": "0123"
-  }
+  },
+  allowNull: false
 };
 
 // Generates an array of objects containing the test file content, following specified configuration
@@ -48,6 +49,7 @@ var tests = stt.testGen(swagger, config);
 * **`pathParams`** *optional*: Object containing the values of a specific path parameters.
 * **`templatesPath`** *optional* String indicating a custom handlebars-template path for generating the tests. Note: copy all the templates to your custom directory, this is a 'all-or-nothing' path
 * **`requestData`** *optional* Array containing data to send with the request See section on requestData for more details
+* **`allowNull`** *optional* Should `null` be allowed in types that don't explicitly state it (`type: string` by default allows `''` but not `null`)
 
 ### Return value
 An array in which each string is content of a test file and the file name. Use this information to write those files to disk.

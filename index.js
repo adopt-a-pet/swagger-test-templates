@@ -465,6 +465,12 @@ function testGen(swagger, config) {
   config.templatesPath = (config.templatesPath) ? config.templatesPath : path.join(__dirname, 'templates');
 
   swagger = deref(swagger);
+
+  if (config.allowNull) {
+    helpers.addNullTypes(swagger.paths);
+    helpers.addNullTypes(swagger.definitions);
+  }
+
   source = fs.readFileSync(path.join(config.templatesPath, '/schema.handlebars'), 'utf8');
   schemaTemp = handlebars.compile(source, {noEscape: true});
   handlebars.registerPartial('schema-partial', schemaTemp);
