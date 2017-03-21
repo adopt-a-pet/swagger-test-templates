@@ -70,13 +70,22 @@ describe('/', function() {
     it('should respond with 200 OK', function(done) {
       /*eslint-disable*/
       var schema = {
-        "type": "object",
+        "type": [
+          "object",
+          "null"
+        ],
         "properties": {
           "id": {
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "username": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           }
         }
       };
@@ -105,7 +114,10 @@ describe('/', function() {
     it('should respond with 400 NOT OK', function(done) {
       /*eslint-disable*/
       var schema = {
-        "type": "object",
+        "type": [
+          "object",
+          "null"
+        ],
         "properties": {
           "meta": "string",
           "data": "number"
@@ -141,13 +153,22 @@ describe('/', function() {
           "data": "number",
           "UserObj": {
             "schema": {
-              "type": "object",
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "id": {
-                  "type": "integer"
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
                 },
                 "username": {
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 }
               }
             }
@@ -182,15 +203,27 @@ describe('/', function() {
     it('should respond with 200 OK', function(done) {
       /*eslint-disable*/
       var schema = {
-        "type": "array",
+        "type": [
+          "array",
+          "null"
+        ],
         "items": {
-          "type": "object",
+          "type": [
+            "object",
+            "null"
+          ],
           "properties": {
             "id": {
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "username": {
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             }
           }
         }
@@ -224,7 +257,10 @@ describe('/', function() {
     it('should respond with 400 NOT OK', function(done) {
       /*eslint-disable*/
       var schema = {
-        "type": "number"
+        "type": [
+          "number",
+          "null"
+        ]
       };
 
       /*eslint-enable*/
@@ -255,7 +291,10 @@ describe('/', function() {
     it('should respond with 500 SERVER ERROR', function(done) {
       /*eslint-disable*/
       var schema = {
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       };
 
       /*eslint-enable*/

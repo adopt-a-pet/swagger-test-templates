@@ -61,7 +61,8 @@ customFormats(ZSchema);
 
 var validator = new ZSchema({});
 var request = require('request');
-var assert = chai.assert;
+
+chai.should();
 
 require('dotenv').load();
 
@@ -70,13 +71,22 @@ describe('/', function() {
     it('should respond with 200 OK', function(done) {
       /*eslint-disable*/
       var schema = {
-        "type": "object",
+        "type": [
+          "object",
+          "null"
+        ],
         "properties": {
           "id": {
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "username": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           }
         }
       };
@@ -95,9 +105,9 @@ describe('/', function() {
       function(error, res, body) {
         if (error) return done(error);
 
-        assert.equal(res.statusCode, 200);
+        res.statusCode.should.equal(200);
 
-        assert.true(validator.validate(body, schema));
+        validator.validate(body, schema).should.be.true;
         done();
       });
     });
@@ -105,7 +115,10 @@ describe('/', function() {
     it('should respond with 400 NOT OK', function(done) {
       /*eslint-disable*/
       var schema = {
-        "type": "object",
+        "type": [
+          "object",
+          "null"
+        ],
         "properties": {
           "meta": "string",
           "data": "number"
@@ -126,9 +139,9 @@ describe('/', function() {
       function(error, res, body) {
         if (error) return done(error);
 
-        assert.equal(res.statusCode, 400);
+        res.statusCode.should.equal(400);
 
-        assert.true(validator.validate(body, schema));
+        validator.validate(body, schema).should.be.true;
         done();
       });
     });
@@ -141,13 +154,22 @@ describe('/', function() {
           "data": "number",
           "UserObj": {
             "schema": {
-              "type": "object",
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "id": {
-                  "type": "integer"
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
                 },
                 "username": {
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 }
               }
             }
@@ -169,9 +191,9 @@ describe('/', function() {
       function(error, res, body) {
         if (error) return done(error);
 
-        assert.equal(res.statusCode, 500);
+        res.statusCode.should.equal(500);
 
-        assert.true(validator.validate(body, schema));
+        validator.validate(body, schema).should.be.true;
         done();
       });
     });
@@ -182,15 +204,27 @@ describe('/', function() {
     it('should respond with 200 OK', function(done) {
       /*eslint-disable*/
       var schema = {
-        "type": "array",
+        "type": [
+          "array",
+          "null"
+        ],
         "items": {
-          "type": "object",
+          "type": [
+            "object",
+            "null"
+          ],
           "properties": {
             "id": {
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "username": {
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             }
           }
         }
@@ -214,9 +248,9 @@ describe('/', function() {
       function(error, res, body) {
         if (error) return done(error);
 
-        assert.equal(res.statusCode, 200);
+        res.statusCode.should.equal(200);
 
-        assert.true(validator.validate(body, schema));
+        validator.validate(body, schema).should.be.true;
         done();
       });
     });
@@ -224,7 +258,10 @@ describe('/', function() {
     it('should respond with 400 NOT OK', function(done) {
       /*eslint-disable*/
       var schema = {
-        "type": "number"
+        "type": [
+          "number",
+          "null"
+        ]
       };
 
       /*eslint-enable*/
@@ -245,9 +282,9 @@ describe('/', function() {
       function(error, res, body) {
         if (error) return done(error);
 
-        assert.equal(res.statusCode, 400);
+        res.statusCode.should.equal(400);
 
-        assert.true(validator.validate(body, schema));
+        validator.validate(body, schema).should.be.true;
         done();
       });
     });
@@ -255,7 +292,10 @@ describe('/', function() {
     it('should respond with 500 SERVER ERROR', function(done) {
       /*eslint-disable*/
       var schema = {
-        "type": "string"
+        "type": [
+          "string",
+          "null"
+        ]
       };
 
       /*eslint-enable*/
@@ -276,9 +316,9 @@ describe('/', function() {
       function(error, res, body) {
         if (error) return done(error);
 
-        assert.equal(res.statusCode, 500);
+        res.statusCode.should.equal(500);
 
-        assert.true(validator.validate(body, schema));
+        validator.validate(body, schema).should.be.true;
         done();
       });
     });
