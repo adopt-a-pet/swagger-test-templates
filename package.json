@@ -1,6 +1,6 @@
 {
-  "name": "swagger-test-templates",
-  "version": "1.3.0",
+  "name": "@aap/swagger-test-templates",
+  "version": "2.0.0",
   "description": "Generate test code from a Swagger spec",
   "main": "index.js",
   "scripts": {
@@ -9,14 +9,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/apigee-127/swagger-test-templates.git"
+    "url": "git+ssh://git@github.com/adopt-a-pet/swagger-test-templates.git"
   },
   "keywords": [
     "Swagger",
     "API",
     "Test"
   ],
-  "swagger-test-templates@1.0.0": [
+  "swagger-test-templates@2.0.0": [
+    {
+      "name": "Kevin McTigue",
+      "email": "kevin@adoptapet.com"
+    },
     {
       "name": "Mohsen Azimi",
       "email": "me@azimi.me",
@@ -33,9 +37,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/apigee-127/swagger-test-templates/issues"
+    "url": "https://github.com/adopt-a-pet/swagger-test-templates/issues"
   },
-  "homepage": "https://github.com/apigee-127/swagger-test-templates#readme",
+  "homepage": "https://github.com/adopt-a-pet/swagger-test-templates#readme",
   "devDependencies": {
     "chai": "^3.0.0",
     "dotenv": "^1.2.0",
