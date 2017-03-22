@@ -1,10 +1,21 @@
 'use strict';
+
+var app = require(process.cwd() + '/app.js');
+
 var chai = require('chai');
 var supertest = require('supertest');
-var api = supertest('https://api.uber.com'); // supertest init;
+var api = supertest(app); // supertest init;
 var assert = chai.assert;
 
 require('dotenv').load();
+
+before(function(done) {
+  if (app.server.listening) return done();
+
+  app.on('listening', function() {
+    done();
+  });
+});
 
 describe('/user', function() {
   describe('get', function() {

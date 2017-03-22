@@ -1,4 +1,7 @@
 'use strict';
+
+var app = require(process.cwd() + '/app.js');
+
 var chai = require('chai');
 var ZSchema = require('z-schema');
 var customFormats = module.exports = function(zSchema) {
@@ -61,10 +64,18 @@ customFormats(ZSchema);
 
 var validator = new ZSchema({});
 var supertest = require('supertest');
-var api = supertest('https://api.uber.com'); // supertest init;
+var api = supertest(app); // supertest init;
 var expect = chai.expect;
 
 require('dotenv').load();
+
+before(function(done) {
+  if (app.server.listening) return done();
+
+  app.on('listening', function() {
+    done();
+  });
+});
 
 describe('/', function() {
   describe('get', function() {

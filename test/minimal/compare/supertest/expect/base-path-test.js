@@ -1,10 +1,21 @@
 'use strict';
+
+var app = require(process.cwd() + '/app.js');
+
 var chai = require('chai');
 var supertest = require('supertest');
-var api = supertest('http://localhost:10010'); // supertest init;
+var api = supertest(app); // supertest init;
 var expect = chai.expect;
 
 require('dotenv').load();
+
+before(function(done) {
+  if (app.server.listening) return done();
+
+  app.on('listening', function() {
+    done();
+  });
+});
 
 describe('/', function() {
   describe('get', function() {

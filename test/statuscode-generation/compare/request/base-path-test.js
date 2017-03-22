@@ -1,8 +1,19 @@
 'use strict';
+
+var app = require(process.cwd() + '/app.js');
+
 var chai = require('chai');
 var request = require('request');
 
 chai.should();
+
+before(function(done) {
+  if (app.server.listening) return done();
+
+  app.on('listening', function() {
+    done();
+  });
+});
 
 describe('/', function() {
   describe('get', function() {
