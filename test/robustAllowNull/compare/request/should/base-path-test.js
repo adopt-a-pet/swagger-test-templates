@@ -60,7 +60,6 @@ var customFormats = module.exports = function(zSchema) {
   });
 };
 
-customFormats(ZSchema);
 
 var validator = new ZSchema({});
 var request = require('request');
@@ -70,11 +69,15 @@ chai.should();
 require('dotenv').load();
 
 before(function(done) {
-  if (app.server.listening) return done();
-
-  app.on('listening', function() {
+  function afterListening() {
+    // Load customFormats now, to overwrite after sway pollutes them
+    customFormats(ZSchema);
     done();
-  });
+  }
+
+  if (app.server.listening) return afterListening();
+
+  app.on('listening', afterListening);
 });
 
 describe('/', function() {

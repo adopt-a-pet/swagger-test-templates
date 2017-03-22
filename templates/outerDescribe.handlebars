@@ -5,7 +5,6 @@ var app = require(process.cwd() + '/app.js');
 var chai = require('chai');{{#if importValidator}}
 var ZSchema = require('z-schema');
 var customFormats = {{customFormats}}
-customFormats(ZSchema);
 
 var validator = new ZSchema({});{{/if}}
 {{#is testmodule 'request'}}
@@ -34,11 +33,17 @@ require('dotenv').load();
 {{/if}}
 
 before(function(done) {
-  if (app.server.listening) return done();
-
-  app.on('listening', function() {
+  function afterListening() {
+{{#if importValidator}}
+    // Load customFormats now, to overwrite after sway pollutes them
+    customFormats(ZSchema);
+{{/if}}
     done();
-  });
+  }
+
+  if (app.server.listening) return afterListening();
+
+  app.on('listening', afterListening);
 });
 
 describe('{{description}}', function() {

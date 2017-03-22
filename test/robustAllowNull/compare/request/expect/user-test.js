@@ -9,11 +9,13 @@ var expect = chai.expect;
 require('dotenv').load();
 
 before(function(done) {
-  if (app.server.listening) return done();
-
-  app.on('listening', function() {
+  function afterListening() {
     done();
-  });
+  }
+
+  if (app.server.listening) return afterListening();
+
+  app.on('listening', afterListening);
 });
 
 describe('/user', function() {
